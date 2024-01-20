@@ -14,9 +14,7 @@ The main change is that the thumb cluster was adapted from the [ManuForm keyboar
 * Column offsets
 * Height
 
-I built a 4x5 version (40% size) for myself. The default has a bit more tenting than the Dactyl. See the following model files for configurations that may be most common:
-
-* [40% size, (4x5)](https://github.com/tshort/dactyl-keyboard/blob/master/things/right-4x5.stl)
+I'm building my 2nd 5x6, this time using the clojure generation to customize the tenting and thumb cluster position to match my hands
 * [60% size, (5x6)](https://github.com/tshort/dactyl-keyboard/blob/master/things/right-5x6.stl)
 
 
@@ -30,6 +28,7 @@ I built a 4x5 version (40% size) for myself. The default has a bit more tenting 
 * [Install OpenSCAD](http://www.openscad.org/)
 
 **Generating the design**
+* TODO: test using https://github.com/weavejester/lein-auto to auto reload the file?
 * Run `lein repl`
 * Load the file `(load-file "src/dactyl_keyboard/dactyl.clj")`
 * This will regenerate the `things/*.scad` files
