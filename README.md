@@ -65,6 +65,9 @@ If printed at Shapeways or other professional shops, I would not expect such pro
 Here are materials I used for wiring.
 
 * Two Arduino Pro Micros
+
+https://vi.aliexpress.com/item/1005002857174387.html
+
 * [Heat-set inserts](https://www.mcmaster.com/#94180a331/=16yfrx1)
 * [M3 wafer-head screws, 5mm](http://www.metricscrews.us/index.php?main_page=product_info&cPath=155_185&products_id=455)
 * [Copper tape](https://www.amazon.com/gp/product/B009KB86BU)

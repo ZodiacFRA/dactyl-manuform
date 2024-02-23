@@ -19,8 +19,8 @@
 (def α (/ π 12))                        ; curvature of the columns
 (def β (/ π 36))                        ; curvature of the rows
 (def centerrow (- nrows 3))             ; controls front-back tilt
-(def centercol 3)                       ; controls left-right tilt / tenting (higher number is more tenting)
-(def tenting-angle (/ π 15))            ; or, change this for more precise tenting control
+(def centercol 4)                       ; controls left-right tilt / tenting (higher number is more tenting)
+(def tenting-angle (/ π 13))            ; or, change this for more precise tenting control (higher is less tenting)
 (def column-style
   (if (> nrows 5) :orthographic :standard))  ; options include :standard, :orthographic, and :fixed
 ; (def column-style :fixed)
@@ -30,9 +30,10 @@
   (>= column 4) [0 -12 5.64]            ; original [0 -5.8 5.64]
   :else [0 0 0]))
 
-(def thumb-offsets [-3 -3 7])
+;; L-R/ F-B / B-T
+(def thumb-offsets [0 -3 3])
 
-(def keyboard-z-offset 13)               ; controls overall height; original=9 with centercol=3; use 16 for centercol=2
+(def keyboard-z-offset 11)               ; controls overall height; original=9 with centercol=3; use 16 for centercol=2
 
 (def extra-width 2.5)                   ; extra space between the base of keys; original= 2
 (def extra-height 1.0)                  ; original= 0.5
@@ -583,12 +584,12 @@
   ))
 
 
-(def rj9-start  (map + [0 -3  0] (key-position 0 0 (map + (wall-locate3 0 1) [0 (/ mount-height  2) 0]))))
-(def rj9-position  [(first rj9-start) (second rj9-start) 11])
-(def rj9-cube   (cube 14.78 13 22.38))
-(def rj9-space  (translate rj9-position rj9-cube))
-(def rj9-holder (translate rj9-position
-                  (difference rj9-cube
+(def usb-start  (map + [0 -3  0] (key-position 0 0 (map + (wall-locate3 0 1) [0 (/ mount-height  2) 0]))))
+(def usb-position  [(first usb-start) (second usb-start) 11])
+(def usb-cube   (cube 14.78 13 22.38))
+(def usb-space  (translate usb-position usb-cube))
+(def usb-holder (translate usb-position
+                  (difference usb-cube
                               (union (translate [0 2 0] (cube 10.78  9 18.38))
                                      (translate [0 0 5] (cube 10.78 13  5))))))
 
@@ -703,10 +704,10 @@
                                       ;;  teensy-holder
                                        )
                                        ; usb-holder)
-                                ; rj9-space
-                                ; usb-holder-hole
+                                ;; usb-space
+                                ;; usb-holder-hole
                                 screw-insert-holes)
-                    ; rj9-holder
+                    ; usb-holder
                     ;; wire-posts
                     ; thumbcaps
                     ; caps
@@ -720,44 +721,15 @@
 (spit "things/left.scad"
       (write-scad (mirror [-1 0 0] model-right)))
 
-(spit "things/right-test.scad"
-      (write-scad
-                   (union
-                    key-holes
-                    connectors
-                    thumb
-                    thumb-connectors
-                    case-walls
-                    thumbcaps
-                    caps
-                    teensy-holder
-                    ; rj9-holder
-                    ; usb-holder-hole
-                    ; usb-holder-hole
-                    ; ; teensy-holder-hole
-                    ;             screw-insert-outers
-                    ;             teensy-screw-insert-holes
-                    ;             teensy-screw-insert-outers
-                    ;             usb-cutout
-                    ;             rj9-space
-                                ; wire-posts
-                  )))
-
 (spit "things/right-plate.scad"
       (write-scad
                    (cut
                      (translate [0 0 -0.1]
                        (difference (union case-walls
                                           teensy-holder
-                                          ; rj9-holder
+                                          ; usb-holder
                                           screw-insert-outers)
                                    (translate [0 0 -10] screw-insert-screw-holes))
                   ))))
-
-(spit "things/test.scad"
-      (write-scad
-         (difference usb-holder usb-holder-hole)))
-
-
 
 (defn -main [dum] 1)  ; dummy to make it easier to batch
